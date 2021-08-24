@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8"/>
-    <title>Cars</title>
+    <title>Users</title>
     <style>
         table th, table td {
             padding: 5px;
@@ -12,23 +12,20 @@
 </head>
 
 <body>
-<h1>Price cars</h1>
+<h1>Users</h1>
 
 <table border="1">
     <tr>
-        <th>No</th>
-        <th>Model</th>
-        <th>Price</th>
-        <th>Color</th>
+        <th>Name</th>
+
     </tr>
 
-    <tr th:each="car, state : ${messages}"
+    <tr th:each="Users, state : ${messages}"
         class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
 
         <td th:utext="${state.count}">No</td>
-        <td th:utext="${car.getModel()}">Model</td>
-        <td th:utext="${car.getPrice()}">Price</td>
-        <td th:utext="${car.getColor()}">Color</td>
+        <td th:utext="${users.getName}">Model</td>
+
     </tr>
 
 </table>
