@@ -1,16 +1,31 @@
 package Model;
 
-public class User {
-    private String name;
-    private String LastName;
-    private String email;
-    private int age;
+import org.springframework.stereotype.Component;
 
-    public User(String name, String lastName, String email, int age) {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "db_users")
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "last_name")
+    private String LastName;
+
+    @Column(name = "email")
+    private String email;
+
+    public User(String name, String lastName, String email) {
         this.name = name;
-        LastName = lastName;
+        this.LastName = lastName;
         this.email = email;
-        this.age = age;
+
     }
 
     public String getName() {
@@ -37,11 +52,4 @@ public class User {
         this.email = email;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 }
