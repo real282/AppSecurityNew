@@ -1,4 +1,4 @@
-package web.config;
+package ru.web.config;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -10,11 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
+import ru.service.UserServiceImp;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("web")
-public class WebConfig implements WebMvcConfigurer  {
+@ComponentScan("ru")
+public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
 

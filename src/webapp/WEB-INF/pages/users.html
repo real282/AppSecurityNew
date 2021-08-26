@@ -16,15 +16,30 @@
 
 <table border="1">
     <tr>
+        <th>N</th>
         <th>Name</th>
+        <th>Last Name</th>
+        <th>E-mail</th>
+        <th>Sex</th>
 
     </tr>
 
     <tr th:each="Users, state : ${messages}"
         class="row" th:classappend="${state.odd} ? 'odd-row' : 'even-row'">
 
-        <td th:utext="${state.count}">No</td>
-        <td th:utext="${users.getName}">Model</td>
+        <td th:utext="${state.count}">N</td>
+        <td th:utext="${Users.getFirstName()}">Name</td>
+        <td th:utext="${Users.getLastName()}">Last Name</td>
+        <td th:utext="${Users.getEmail()}">E-mail</td>
+        <div th:if="${Users.getMale()}">
+            <td th:text="male">Sex</td>
+        </div>
+        <div th:unless="${Users.getMale()}">
+            <td th:text="female">Sex</td>
+        </div>
+
+
+
 
     </tr>
 
