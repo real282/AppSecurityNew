@@ -29,7 +29,7 @@ public class UserController {
     //Переход на форму создания нового пользователя
     @GetMapping(value = "/create")
     public String createUser(Model model) {
-        model.addAttribute("User",new User());
+        model.addAttribute("User", new User());
         return "create";
     }
 
@@ -37,7 +37,7 @@ public class UserController {
     @RequestMapping(value = "/add")
     public String addUser(@ModelAttribute("user") User user, Model model) {
         userService.add(user);
-        model.addAttribute("User",new User());
+        model.addAttribute("User", new User());
         return "create";
     }
 

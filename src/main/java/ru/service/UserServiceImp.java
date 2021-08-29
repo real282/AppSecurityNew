@@ -17,12 +17,10 @@ public class UserServiceImp implements UserService {
         this.userDao = userDao;
     }
 
-
     @Override
     public void add(User user) {
         userDao.add(user);
     }
-
 
     @Override
     public List<User> listUsers() {

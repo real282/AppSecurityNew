@@ -30,10 +30,6 @@ public class UserDaoImp implements UserDao {
     @Override
     public void update(User user) {
         entityManager.merge(user);
-//        User editableUser = entityManager.merge(user);
-//        user.setFirstName(editableUser.getFirstName());
-//        user.setLastName(editableUser.getLastName());
-//        user.setEmail(editableUser.getEmail());
     }
 
     @Override
