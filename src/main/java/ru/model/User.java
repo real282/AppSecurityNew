@@ -20,17 +20,14 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name="male")
-    private boolean male;
-
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, boolean male) {
+    public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.male = male;
+
     }
 
     public Long getId() {
@@ -65,13 +62,6 @@ public class User {
         this.email = email;
     }
 
-    public boolean getMale() {
-        return male;
-    }
-
-    public void setMale(boolean male) {
-        this.male = male;
-    }
 
     @Override
     public String toString() {
@@ -80,7 +70,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", male=" + male +
                 '}';
     }
 }
