@@ -4,6 +4,7 @@ package ru.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.model.User;
 import ru.service.UserService;
@@ -20,12 +21,10 @@ public class UserController {
     }
 
 
-
     @GetMapping(value = "/")
     public String printCars(Model model) {
-        System.out.println(userService.listUsers().toString());
         model.addAttribute("messages", userService.listUsers());
-        return "users";
+        return "index";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -34,13 +33,21 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @GetMapping(value = "/delete={id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.delete(id);
         return "redirect:/";
     }
 
+    @GetMapping(value = "/update={id}")
+    public String update(@PathVariable("id") long id) {
+        String str = "redirect:/update?id=" + id;
+        return str;
+    }
 
-
+    @GetMapping(value = "/create")
+    public String createUser() {
+        return "create";
+    }
 
 }
