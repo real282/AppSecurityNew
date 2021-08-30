@@ -19,13 +19,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/")
+    @RequestMapping (value = "/")
     public String printCars(Model model) {
         model.addAttribute("messages", userService.listUsers());
         return "index";
     }
 
-    @GetMapping(value = "/create")
+    @RequestMapping(value = "/create")
     public String createUser(Model model) {
         model.addAttribute("User", new User());
         return "create";
@@ -38,13 +38,13 @@ public class UserController {
         return "create";
     }
 
-    @GetMapping(value = "/delete={id}")
+    @RequestMapping(value = "/delete={id}")
     public String deleteUser(@PathVariable("id") long id) {
         userService.delete(id);
         return "redirect:/";
     }
 
-    @GetMapping(value = "/update={id}")
+    @RequestMapping(value = "/update={id}")
     public String update(@PathVariable("id") long id, Model model) {
         model.addAttribute("User", userService.getUserId(id));
         return "update";

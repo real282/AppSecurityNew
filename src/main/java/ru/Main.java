@@ -2,10 +2,12 @@ package ru;
 
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import ru.config.DBConfig;
 import ru.model.User;
 import ru.service.UserServiceImp;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class Main {
@@ -20,6 +22,8 @@ public class Main {
         userService.add(new User("User3", "Lastname3", "user3@mail.ru"));
         userService.add(new User("User4", "Lastname4", "user4@mail.ru"));
 
+        DriverManagerDataSource managerDataSource = new DriverManagerDataSource();
+        managerDataSource.setPassword("root");
 
 //        List<User> users = userService.listUsers();
 //        System.out.println(users.toString());
