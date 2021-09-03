@@ -1,4 +1,4 @@
-package ru.web.config;
+package ru.config.web;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

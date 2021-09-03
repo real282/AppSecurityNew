@@ -43,5 +43,10 @@ public class UserDaoImp implements UserDao {
                 .executeUpdate();
     }
 
+    @Override
+    public User getUserByName(String name) {
+        return null;
+    }
+
 
 }
