@@ -2,15 +2,17 @@ package ru.model;
 
 import lombok.Getter;
 import lombok.Setter;
+
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "roles")
 @Getter
 @Setter
-public class Roles implements GrantedAuthority {
+public class Role implements GrantedAuthority {
 
     @Column(nullable = false)
     @Id
@@ -20,11 +22,20 @@ public class Roles implements GrantedAuthority {
     @Column
     private String role;
 
+    @ManyToMany(mappedBy = "roles")
+    private Set<User> users;
+
+
+    public Role() {
+
+    }
+
+    public Role(String role) {
+        this.role = role;
+    }
+
     @Override
     public String getAuthority() {
         return role;
-    }
-
-    public Roles() {
     }
 }
