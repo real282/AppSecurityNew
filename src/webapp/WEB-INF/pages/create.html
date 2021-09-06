@@ -9,14 +9,17 @@
 
 
 <form th:method="POST" th:action="@{/add}" th:object="${User}">
-    <label for="firstName">First name </label>
-    <input type="text" th:field="*{firstName}" id="firstName"/>
+    <label for="name">First name </label>
+    <input type="text" th:field="*{name}" id="name"/>
     <br>
     <label for="lastName">Last name </label>
     <input type="text" th:field="*{lastName}" id="lastName"/>
     <br>
     <label for="email">E-mail </label>
     <input type="text" th:field="*{email}" id="email"/>
+    <br>
+    <label for="password">Password</label>
+    <input type="password" th:field="*{password}" id="password"/>
     <br>
     <button type="submit">Ok</button>
 </form>

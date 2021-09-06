@@ -1,4 +1,4 @@
-package ru.dao;
+package ru.dao.UserDAO;
 
 import ru.model.User;
 

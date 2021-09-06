@@ -53,7 +53,7 @@ public class DBConfig {
         Properties properties = new Properties();
 
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-        properties.put("hibernate.hbm2ddl.auto", "create");
+        properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.show_sql", "true");
 
         entityManager.setDataSource(getDataSource());
@@ -71,4 +71,5 @@ public class DBConfig {
         transactionManager.setEntityManagerFactory(getEntityManager().getObject());
         return transactionManager;
     }
+
 }

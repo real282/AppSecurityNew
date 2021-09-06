@@ -2,8 +2,11 @@ package ru.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -15,6 +18,7 @@ import java.util.Set;
 @Table(name = "users")
 @Getter
 @Setter
+@Component
 public class User implements UserDetails {
 
     @Id
@@ -98,5 +102,17 @@ public class User implements UserDetails {
     @Override
     public int hashCode() {
         return Objects.hash(name, password);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                '}';
     }
 }

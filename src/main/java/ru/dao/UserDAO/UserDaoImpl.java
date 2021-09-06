@@ -1,15 +1,16 @@
-package ru.dao;
+package ru.dao.UserDAO;
 
 import org.springframework.stereotype.Repository;
 import ru.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository
-public class UserDaoImp implements UserDao {
+public class UserDaoImpl implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -17,7 +18,16 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void add(User user) {
-        entityManager.persist(user);
+        String name = null;
+        try {
+            name = getUserByName(user.getName()).getName();
+        } catch (Exception ignore) {
+
+        }
+        System.out.println("NAME " + name);
+        if (name == null) {
+            entityManager.persist(user);
+        }
     }
 
     @Override
@@ -45,8 +55,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User getUserByName(String name) {
-        return null;
+        return entityManager.createQuery("FROM User u WHERE u.name=:name", User.class)
+                .setParameter("name", name)
+                .getSingleResult();
     }
-
-
 }

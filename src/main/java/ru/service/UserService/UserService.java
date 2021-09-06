@@ -1,12 +1,12 @@
-package ru.service;
+package ru.service.UserService;
 
-import org.springframework.stereotype.Component;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ru.model.User;
 
 import java.util.List;
 
 
-public interface UserService {
+public interface UserService extends UserDetailsService {
     void add(User user);
 
     List<User> listUsers();

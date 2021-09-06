@@ -1,21 +1,24 @@
-package ru.service;
+package ru.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.dao.UserDao;
+import ru.dao.UserDAO.UserDao;
 import ru.model.User;
+import ru.service.UserService.UserService;
 
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImp implements UserService {
+public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
     @Autowired
-    public UserServiceImp(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -45,4 +48,8 @@ public class UserServiceImp implements UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return userDao.getUserByName(s);
+    }
 }
