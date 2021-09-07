@@ -28,9 +28,10 @@ public class PrimaryInitAdmin {
     public void addAdmin() {
         System.out.println("add ADMIN");
         Set<Role> setRoles = new HashSet<>();
-        setRoles.add(new Role("ADMIN"));
-        setRoles.add(new Role("USER"));
+        setRoles.add(new Role("ROLE_ADMIN"));
+        setRoles.add(new Role("ROLE_USER"));
         User admin = new User("ADMIN", passwordEncoder.encode("ADMIN"), "Roznin", "real282@mail.ru", setRoles);
         userService.add(admin);
+        System.out.println(userService.getUserId(1).getRoles().toString());
     }
 }

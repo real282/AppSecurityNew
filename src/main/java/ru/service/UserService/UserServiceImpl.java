@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.dao.UserDAO.UserDao;
 import ru.model.User;
-import ru.service.UserService.UserService;
+
 
 import javax.transaction.Transactional;
 import java.util.List;

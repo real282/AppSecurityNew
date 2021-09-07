@@ -1,6 +1,7 @@
 package ru.dao.UserDAO;
 
 import org.springframework.stereotype.Repository;
+import ru.model.Role;
 import ru.model.User;
 
 import javax.persistence.EntityManager;
@@ -24,7 +25,6 @@ public class UserDaoImpl implements UserDao {
         } catch (Exception ignore) {
 
         }
-        System.out.println("NAME " + name);
         if (name == null) {
             entityManager.persist(user);
         }
@@ -34,6 +34,13 @@ public class UserDaoImpl implements UserDao {
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
         return entityManager.createQuery("FROM User", User.class).getResultList();
+    }
+
+    @Override
+    public List<Role> listRoles(int id) {
+        return entityManager.createQuery("FROM Role r WHERE r.id=:id ", Role.class)
+                .setParameter("id", id)
+                .getResultList();
     }
 
     @Override

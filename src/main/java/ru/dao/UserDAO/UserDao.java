@@ -1,5 +1,6 @@
 package ru.dao.UserDAO;
 
+import ru.model.Role;
 import ru.model.User;
 
 import java.util.List;
@@ -9,6 +10,8 @@ public interface UserDao {
 
     List<User> listUsers();
 
+    List<Role> listRoles(int id);
+
     void update(User user);
 
     User getUserId(long id);
@@ -16,5 +19,6 @@ public interface UserDao {
     void delete(long id);
 
     User getUserByName(String name);
+
 
 }

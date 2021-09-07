@@ -17,11 +17,13 @@ import ru.service.UserService.UserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
 
-    private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
+    private final SuccessUserHandler successUserHandler;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SecurityConfig(@Qualifier("userServiceImpl") UserService userService, SuccessUserHandler successUserHandler, PasswordEncoder passwordEncoder) {
+    public SecurityConfig(@Qualifier("userServiceImpl") UserService userService,
+                          SuccessUserHandler successUserHandler,
+                          PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.successUserHandler = successUserHandler;
         this.passwordEncoder = passwordEncoder;
@@ -29,15 +31,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder()); // конфигурация для прохождения аутентификации
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
         http.authorizeRequests()
-                .antMatchers("/index").hasAnyRole("ROLE_ADMIN")
-                .and().formLogin()
+                .antMatchers("/index/**").hasAnyRole("ADMIN")
+                .and()
+                .formLogin()
                 .successHandler(successUserHandler);
     }
 

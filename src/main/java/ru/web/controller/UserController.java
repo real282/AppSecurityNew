@@ -11,12 +11,11 @@ import ru.service.UserService.UserService;
 
 
 @Controller
+@RequestMapping(value = "/")
 public class UserController {
 
 
     private final UserService userService;
-
-    @Autowired
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -25,8 +24,9 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @RequestMapping (value = "/")
-    public String printCars(Model model) {
+    //главная страница
+    @GetMapping(value = "/index")
+    public String printIndex(Model model) {
         model.addAttribute("messages", userService.listUsers());
         return "index";
     }
@@ -37,7 +37,7 @@ public class UserController {
         return "create";
     }
 
-    @RequestMapping(value = "/add")
+    @PostMapping(value = "/add")
     public String addUser(@ModelAttribute("user") User user, Model model) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.add(user);
@@ -45,10 +45,11 @@ public class UserController {
         return "create";
     }
 
-    @RequestMapping(value = "/delete={id}")
+    @GetMapping(value = "/delete={id}")
     public String deleteUser(@PathVariable("id") long id) {
+        System.out.println("DELETE " + id);
         userService.delete(id);
-        return "redirect:/";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/update={id}")
@@ -61,5 +62,10 @@ public class UserController {
     public String editUser(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/";
+    }
+
+    @GetMapping(value = "info")
+    public String getInfo() {
+        return "info";
     }
 }
