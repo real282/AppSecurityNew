@@ -32,6 +32,6 @@ public class PrimaryInitAdmin {
         setRoles.add(new Role("ROLE_USER"));
         User admin = new User("ADMIN", passwordEncoder.encode("ADMIN"), "Roznin", "real282@mail.ru", setRoles);
         userService.add(admin);
-        System.out.println(userService.getUserId(1).getRoles().toString());
+
     }
 }

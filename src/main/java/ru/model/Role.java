@@ -13,15 +13,13 @@ import java.util.Set;
 @Table(name = "roles")
 @Getter
 @Setter
-@Component
 public class Role implements GrantedAuthority {
 
-    @Column(nullable = false)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column
+    @Column(name = "role")
     private String role;
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
