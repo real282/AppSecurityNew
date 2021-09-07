@@ -24,6 +24,10 @@ public class Role implements GrantedAuthority {
     @Column
     private String role;
 
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
+    private Set<User> users;
+
+
     public Role() {
 
     }
@@ -42,6 +46,7 @@ public class Role implements GrantedAuthority {
         return "Role{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
+                ", users=" + users +
                 '}';
     }
 }
