@@ -2,6 +2,7 @@ package ru.web.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,14 +25,18 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    //главная страница
-    @GetMapping(value = "/index")
-    public String printIndex(Model model) {
-        model.addAttribute("messages", userService.listUsers());
-        return "index";
+    @GetMapping(value = "/")
+    public String loginPage() {
+        return "login";
     }
 
-    @RequestMapping(value = "/create")
+    @GetMapping(value = "/list")
+    public String printIndex(Model model) {
+        model.addAttribute("messages", userService.listUsers());
+        return "listUser";
+    }
+
+    @GetMapping(value = "/create")
     public String createUser(Model model) {
         model.addAttribute("User", new User());
         return "create";
@@ -49,23 +54,31 @@ public class UserController {
     public String deleteUser(@PathVariable("id") long id) {
         System.out.println("DELETE " + id);
         userService.delete(id);
-        return "redirect:/index";
+        return "redirect:/list";
     }
 
-    @RequestMapping(value = "/update={id}")
+    @GetMapping(value = "/update={id}")
     public String update(@PathVariable("id") long id, Model model) {
         model.addAttribute("User", userService.getUserId(id));
-        return "update";
+        return "AllPage/update";
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @PostMapping(value = "/edit")
     public String editUser(@ModelAttribute("user") User user) {
         userService.update(user);
         return "redirect:/";
     }
 
-    @GetMapping(value = "info")
-    public String getInfo() {
-        return "info";
+    @GetMapping(value = "userPage")
+    public String getInfo(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
+        return "homePageUser";
     }
+
+    @GetMapping(value = "adminPage")
+    public String getInfoAdmin(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
+        return "homePageAdmin";
+    }
+
 }

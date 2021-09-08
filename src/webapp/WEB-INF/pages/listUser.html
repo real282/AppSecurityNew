@@ -21,8 +21,7 @@
         <th>Name</th>
         <th>Last Name</th>
         <th>E-mail</th>
-        <th>Role</th>
-        <th>DELETE</th>
+        <th>Delete</th>
         <th>Edit</th>
 
 
@@ -34,7 +33,7 @@
         <td th:utext="${users.getName()}">Name</td>
         <td th:utext="${users.getLastName()}">Last Name</td>
         <td th:utext="${users.getEmail()}">E-mail</td>
-        <td th:utext="${users.getRoles()}">Role</td>
+
 
         <td><a th:href="@{/delete={id}(id=${users.getId()})}">Delete</a></td>
         <td><a th:href="@{/update={id}(id=${users.getId()})}">Edit</a></td>
