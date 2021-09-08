@@ -57,7 +57,7 @@ public class UserController {
         return "redirect:/list";
     }
 
-    @GetMapping(value = "/update={id}")
+    @GetMapping (value = "/update={id}")
     public String update(@PathVariable("id") long id, Model model) {
         model.addAttribute("User", userService.getUserId(id));
         return "AllPage/update";
@@ -72,13 +72,13 @@ public class UserController {
     @GetMapping(value = "userPage")
     public String getInfo(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "homePageUser";
+        return "userPage";
     }
 
     @GetMapping(value = "adminPage")
     public String getInfoAdmin(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
-        return "homePageAdmin";
+        return "adminPage";
     }
 
 }
