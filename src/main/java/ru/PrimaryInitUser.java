@@ -2,10 +2,10 @@ package ru;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.model.Role;
 import ru.model.User;
+import ru.service.RoleService.RoleService;
 import ru.service.UserService.UserService;
 
 import javax.annotation.PostConstruct;
@@ -16,31 +16,36 @@ import java.util.Set;
 public class PrimaryInitUser {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     @Autowired
-    public PrimaryInitUser(UserService userService, PasswordEncoder passwordEncoder) {
+    public PrimaryInitUser(UserService userService, RoleService roleService) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
+
 
     @PostConstruct
     public void addAdmin() {
         System.out.println("add User");
+        Role roleAdmin = new Role("ROLE_ADMIN");
+        Role roleUser = new Role("ROLE_USER");
+        roleService.add(roleAdmin);
+        roleService.add(roleUser);
         Set<Role> setRolesAdmin = new HashSet<>();
-        setRolesAdmin.add(new Role("ROLE_ADMIN"));
-        setRolesAdmin.add(new Role("ROLE_USER"));
+        setRolesAdmin.add(roleService.getRoleByName("ROLE_ADMIN"));
+        setRolesAdmin.add(roleService.getRoleByName("ROLE_USER"));
         User admin = new User("ADMIN",
-                passwordEncoder.encode("ADMIN"),
+                "ADMIN",
                 "Roznin",
                 "real282@mail.ru",
                 setRolesAdmin);
         userService.add(admin);
 
         Set<Role> setRolesUser = new HashSet<>();
-        setRolesUser.add(new Role("ROLE_USER"));
+        setRolesUser.add(roleService.getRoleByName("ROLE_USER"));
         User user = new User("USER",
-                passwordEncoder.encode("USER"),
+                "USER",
                 "Petrov",
                 "test@mail.ru",
                 setRolesUser);

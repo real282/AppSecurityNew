@@ -2,6 +2,7 @@ package ru.dao.RoleDAO;
 
 import org.springframework.stereotype.Repository;
 import ru.model.Role;
+import ru.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,15 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public void add(Role role) {
-        entityManager.persist(role);
+        String nameRole = null;
+        try {
+            nameRole = getRoleByName(role.getRole()).getRole();
+        } catch (Exception ignore) {
+
+        }
+        if (nameRole == null) {
+            entityManager.persist(role);
+        }
     }
 
     @Override
@@ -39,5 +48,12 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role getRoleById(int id) {
         return entityManager.find(Role.class, id);
+    }
+
+    @Override
+    public Role getRoleByName(String role) {
+        return entityManager.createQuery("FROM Role r WHERE r.role=:role", Role.class )
+                .setParameter("role", role)
+                .getSingleResult();
     }
 }
