@@ -1,4 +1,4 @@
-package ru;
+package ru.PrimaryInit;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
