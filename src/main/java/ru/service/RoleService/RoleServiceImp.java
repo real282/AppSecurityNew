@@ -26,16 +26,6 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
-    public void delete(int id) {
-        roleDao.delete(id);
-    }
-
-    @Override
-    public void update(Role role) {
-        roleDao.update(role);
-    }
-
-    @Override
     public List<Role> listRole() {
         return roleDao.listRole();
     }

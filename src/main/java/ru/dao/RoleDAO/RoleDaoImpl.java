@@ -28,18 +28,6 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public void delete(int id) {
-        entityManager.createQuery("DELETE FROM Role r WHERE r.id=:id")
-                .setParameter("id", id)
-                .executeUpdate();
-    }
-
-    @Override
-    public void update(Role role) {
-        entityManager.merge(role);
-    }
-
-    @Override
     @SuppressWarnings("unchecked")
     public List<Role> listRole() {
         return entityManager.createQuery("FROM Role", Role.class).getResultList();
@@ -52,7 +40,7 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleByName(String role) {
-        return entityManager.createQuery("FROM Role r WHERE r.role=:role", Role.class )
+        return entityManager.createQuery("FROM Role r WHERE r.role=:role", Role.class)
                 .setParameter("role", role)
                 .getSingleResult();
     }

@@ -3,7 +3,6 @@ package ru.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +11,6 @@ import ru.model.User;
 import ru.service.RoleService.RoleService;
 import ru.service.UserService.UserService;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,10 +54,10 @@ public class UserController {
     //обработка кнопки с формы регистрации нового пользователя
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") User user,
-                          @RequestParam("rolesArr") Integer [] rolesId,
+                          @RequestParam("rolesArr") Integer[] rolesId,
                           Model model) {
         Set<Role> setRole = new HashSet<>();
-        for(int id: rolesId) {
+        for (int id : rolesId) {
             setRole.add(roleService.getRoleById(id));
         }
         user.setRoles(setRole);
@@ -78,7 +76,7 @@ public class UserController {
     }
 
     //страница с формой редактирования пользователя
-    @GetMapping ("/update={id}")
+    @GetMapping("/update={id}")
     public String update(@PathVariable("id") long id, Model model) {
         model.addAttribute("User", userService.getUserId(id));
         model.addAttribute("Roles", roleService.listRole());
@@ -88,9 +86,9 @@ public class UserController {
     //обработка кнопки ОК из формы редактирования пользователя
     @PatchMapping("/edit")
     public String editUser(@ModelAttribute("user") User user,
-                           @RequestParam("rolesArr") Integer [] rolesId) {
+                           @RequestParam("rolesArr") Integer[] rolesId) {
         Set<Role> setRole = new HashSet<>();
-        for(int id: rolesId) {
+        for (int id : rolesId) {
             setRole.add(roleService.getRoleById(id));
         }
         user.setRoles(setRole);
@@ -111,7 +109,4 @@ public class UserController {
         model.addAttribute("user", user);
         return "adminPage";
     }
-
-
-
 }

@@ -26,7 +26,7 @@
     <div>
         <p>Select roles: </p>
         <select th:name="rolesArr" multiple required size="5">
-            <div th:each ="role : ${Roles}">
+            <div th:each="role : ${Roles}">
                 <option th:text="${role.getRole()}"
                         th:value="${role.getId()}">
                 </option>
