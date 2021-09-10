@@ -54,17 +54,14 @@ public class UserController {
     //обработка кнопки с формы регистрации нового пользователя
     @PostMapping("/add")
     public String addUser(@ModelAttribute("user") User user,
-                          @RequestParam("rolesArr") Integer[] rolesId,
-                          Model model) {
+                          @RequestParam("rolesArr") Integer[] rolesId) {
         Set<Role> setRole = new HashSet<>();
         for (int id : rolesId) {
             setRole.add(roleService.getRoleById(id));
         }
         user.setRoles(setRole);
         userService.add(user);
-        model.addAttribute("User", new User());
-        model.addAttribute("Roles", roleService.listRole());
-        return "create";
+        return "redirect:/list";
     }
 
     //удаление пользователя
@@ -78,7 +75,9 @@ public class UserController {
     //страница с формой редактирования пользователя
     @GetMapping("/update={id}")
     public String update(@PathVariable("id") long id, Model model) {
-        model.addAttribute("User", userService.getUserId(id));
+        User user = userService.getUserId(id);
+        user.setPassword("");
+        model.addAttribute("User", user);
         model.addAttribute("Roles", roleService.listRole());
         return "update";
     }
