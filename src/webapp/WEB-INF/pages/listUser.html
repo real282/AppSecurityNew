@@ -24,7 +24,6 @@
         <th>Delete</th>
         <th>Edit</th>
 
-
     </tr>
 
     <tr th:each="users, state : ${messages}">
@@ -36,9 +35,6 @@
 
         <td><a th:href="@{/delete={id}(id=${users.getId()})}">Delete</a></td>
         <td><a th:href="@{/update={id}(id=${users.getId()})}">Edit</a></td>
-
-
-
 
     </tr>
 </table>
